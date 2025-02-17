@@ -14,6 +14,8 @@ interface AuthContextType {
   firstName: string;
   lastName: string;
   userId: string;
+  // Need to use isInitialized to prevent redirecting authenticated users before context has loaded
+  isInitialized: boolean;
   setUser: (firstName: string, lastName: string) => void;
   logout: () => void;
 }
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState("");
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const router = useRouter();
 
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.error("Failed to parse authData from localStorage", error);
       }
     }
+    setIsInitialized(true); // Update isInitialized to trigger redirection (or not) after loading auth state
   }, []);
 
   // When auth state changes, update local storage
@@ -58,14 +62,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [firstName, lastName, userId]);
 
   // setUser function to set global auth state
+  // Update localStorage immediately in setUser
   const setUser = (firstName: string, lastName: string) => {
     setFirstName(firstName);
     setLastName(lastName);
-    // Compute userId in lowercase snake case
     const computedUserId = `${firstName.trim().toLowerCase()}_${lastName
       .trim()
       .toLowerCase()}`;
     setUserId(computedUserId);
+    localStorage.setItem(
+      "authData",
+      JSON.stringify({ firstName, lastName, userId: computedUserId })
+    );
     setNotification({
       message: `Logged in as ${computedUserId}`,
       severity: "success",
@@ -73,10 +81,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // logout function clears global auth state
+  // Clear state and localStorage immediately in logout
   const logout = () => {
     setFirstName("");
     setLastName("");
     setUserId("");
+    localStorage.removeItem("authData");
     setNotification({
       message: "Logged out successfully.",
       severity: "success",
@@ -86,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ firstName, lastName, userId, setUser, logout }}
+      value={{ firstName, lastName, userId, isInitialized, setUser, logout }}
     >
       {children}
     </AuthContext.Provider>

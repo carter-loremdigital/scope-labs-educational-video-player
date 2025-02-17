@@ -76,23 +76,23 @@ export default function UploadPage() {
 
     try {
       // Make a POST request to upload the video
-      // const response = await fetch(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/videos`,
-      //   {
-      //     method: "POST",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({
-      //       user_id: userId,
-      //       title,
-      //       description,
-      //       video_url: videoUrl,
-      //     }),
-      //   }
-      // );
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/videos`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: userId,
+            title,
+            description,
+            video_url: videoUrl,
+          }),
+        }
+      );
 
-      // if (!response.ok) {
-      //   throw new Error("Upload failed.");
-      // }
+      if (!response.ok) {
+        throw new Error("Upload failed.");
+      }
 
       setNotification({
         message: "Video uploaded successfully!",

@@ -7,20 +7,22 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
+// Component for protecting pages from unauthenticated users
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { userId } = useAuth();
+  const { userId, isInitialized } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!userId) {
+    if (isInitialized && !userId) {
       router.push("/login");
     }
-  }, [userId, router]);
+  }, [isInitialized, userId, router]);
 
-  if (!userId) {
-    // Optionally return a loader or null while redirecting
+  if (!isInitialized || !userId) {
+    // While loading or if not authenticated, return null or a loading indicator
     return null;
   }
+
   return <>{children}</>;
 };
 
