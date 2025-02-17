@@ -1,5 +1,9 @@
-// import styles from "./page.module.css";
+import { Typography } from "@mui/material";
 
 export default function Home() {
-  return <div>Home page</div>;
+  return (
+    <div>
+      <Typography>Home Page</Typography>
+    </div>
+  );
 }
