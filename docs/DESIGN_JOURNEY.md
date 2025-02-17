@@ -152,12 +152,13 @@ An EdTech company has tasked me with developing a simple web application that al
 
 ## Technology Stack & Justification
 
-| Technology                                                     | Purpose                      | Justification                                                                                 |
-| -------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------- |
-| **Next.js 15**                                                 | Frontend framework           | Hybrid rendering (SSR + CSR) for optimal performance                                          |
-| **MUI (Material UI)**                                          | UI component library         | Pre-built components to ensure a polished UI with accessibility features                      |
-| **React Context**                                              | Client-side state management | Simplest option for managing the user's "authentication" state                                |
-| [**react-player**](https://www.npmjs.com/package/react-player) | Video playback & controls    | Flexible, lightweight, and responsive option for a robust video player with built-in controls |
+| Technology                                                     | Purpose                      | Justification                                                                                                                                                         |
+| -------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Next.js 15**                                                 | Frontend framework           | Hybrid rendering (SSR + CSR) for optimal performance                                                                                                                  |
+| **MUI (Material UI)**                                          | UI component library         | Pre-built components to ensure a polished UI with accessibility features                                                                                              |
+| **React Context**                                              | Client-side state management | Simplest option for managing the user's "authentication" state                                                                                                        |
+| [**react-player**](https://www.npmjs.com/package/react-player) | Video playback & controls    | Flexible, lightweight, and responsive option for a robust video player with built-in controls                                                                         |
+| [**obscenity**](https://www.npmjs.com/package/obscenity)       | Profanity filter             | Users should not be allowed to upload profane content, including video titles, descriptions, and comments to an educational platform potentially targeted at children |
 
 ---
 

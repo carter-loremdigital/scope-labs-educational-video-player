@@ -6,6 +6,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+import { useRouter } from "next/navigation";
 
 // TS type for Auth Context
 interface AuthContextType {
@@ -22,6 +23,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState("");
+
+  const router = useRouter();
 
   // Store auth data in localStorage (not suitable for production but works for our app)
   // localStorage allows us to maintain login state across hot reloads and full refreshes
@@ -68,6 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setFirstName("");
     setLastName("");
     setUserId("");
+    router.push("/"); // Redirect user to home page after logout
   };
 
   return (

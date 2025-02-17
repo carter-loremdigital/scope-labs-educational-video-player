@@ -24,7 +24,7 @@ const Navbar = () => {
           // Authenticated user
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Typography>Hi, {firstName}</Typography>
-            <Button color="inherit" startIcon={<Add />}>
+            <Button href="/upload" color="inherit" startIcon={<Add />}>
               Upload
             </Button>
             <Button color="inherit" startIcon={<Logout />} onClick={logout}>
