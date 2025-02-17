@@ -7,6 +7,7 @@ import {
   useEffect,
 } from "react";
 import { useRouter } from "next/navigation";
+import { useNotification } from "@/context/NotificationContext";
 
 // TS type for Auth Context
 interface AuthContextType {
@@ -20,6 +21,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const { setNotification } = useNotification();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState("");
@@ -64,6 +66,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       .trim()
       .toLowerCase()}`;
     setUserId(computedUserId);
+    setNotification({
+      message: `Logged in as ${computedUserId}`,
+      severity: "success",
+    });
   };
 
   // logout function clears global auth state
@@ -71,6 +77,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setFirstName("");
     setLastName("");
     setUserId("");
+    setNotification({
+      message: "Logged out successfully.",
+      severity: "success",
+    });
     router.push("/"); // Redirect user to home page after logout
   };
 

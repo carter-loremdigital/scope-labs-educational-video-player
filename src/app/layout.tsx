@@ -6,6 +6,8 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "@/styles/theme";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
+import { NotificationProvider } from "@/context/NotificationContext";
+import NotificationSnackbar from "@/components/NotificationSnackbar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -31,10 +33,13 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
 
-            <AuthProvider>
-              <Navbar />
-              {children}
-            </AuthProvider>
+            <NotificationProvider>
+              <AuthProvider>
+                <Navbar />
+                {children}
+                <NotificationSnackbar />
+              </AuthProvider>
+            </NotificationProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

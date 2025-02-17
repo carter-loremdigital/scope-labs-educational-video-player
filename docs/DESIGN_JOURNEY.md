@@ -43,6 +43,12 @@ An EdTech company has tasked me with developing a simple web application that al
 - **Why?** Present users with a familiar application flow & create a foundation for future implementation of server-side authentication.
 - **Implementation Notes:** Manage authentication state on the client using React Context.
 
+### Global Notification System
+
+- **What?** Display toast messages to users to provide application feedback on their actions.
+- **Why?** Providing the user with feedback based on their actions helps them understand the application's function and reinforces their mental model.
+- **Implementation Notes**: Use React Context to display messages anywhere in the application, even across redirects.
+
 ### Protected Pages
 
 - **What?** Prevent users from accessing video pages if they are not logged in.
