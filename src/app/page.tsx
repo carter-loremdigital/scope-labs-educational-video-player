@@ -1,6 +1,11 @@
+"use client";
+
 import Hero from "@/components/Hero";
-import { Typography } from "@mui/material";
+import VideoDashboard from "@/components/VideoDashboard";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
-  return <Hero />;
+  const { userId } = useAuth();
+
+  return <>{userId ? <VideoDashboard /> : <Hero />}</>;
 }

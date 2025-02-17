@@ -5,6 +5,7 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "@/styles/theme";
 import Navbar from "@/components/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -29,8 +30,11 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Navbar />
-            {children}
+
+            <AuthProvider>
+              <Navbar />
+              {children}
+            </AuthProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

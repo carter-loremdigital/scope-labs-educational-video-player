@@ -1,3 +1,4 @@
+import { Login } from "@mui/icons-material";
 import { Box, Typography, Button } from "@mui/material";
 
 const Hero = () => {
@@ -19,7 +20,13 @@ const Hero = () => {
       <Typography variant="h5" component="p" gutterBottom>
         Your all-in-one platform for educational videos and discussions.
       </Typography>
-      <Button href="/login" variant="contained" color="primary" sx={{ mt: 2 }}>
+      <Button
+        href="/login"
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
+        startIcon={<Login />}
+      >
         Log In
       </Button>
     </Box>

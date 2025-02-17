@@ -2,11 +2,16 @@
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState({ firstName: false, lastName: false });
+  const { setUser } = useAuth();
+
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +25,9 @@ export default function LoginPage() {
       return;
     }
 
-    // TODO: Handle login logic here (e.g., update global state, redirect, etc.)
-    const username = `${firstName}_${lastName}`.toLowerCase();
-    console.log("Logging in as:", username);
+    // Store user data in auth context
+    setUser(firstName, lastName);
+    router.push("/"); // Redirect to home page
   };
 
   return (
