@@ -95,21 +95,58 @@ An EdTech company has tasked me with developing a simple web application that al
 ### Pages
 
 - **Home Page** - `/`
+
   - Dynamically display content based on user's "authentication" state.
   - **Unauthenticated Users**: Visually appealing hero section with informative content & login CTA.
   - **Authenticated Users**: Video dashboard displaying their videos in a grid format.
+
+  ![Home Mobile Unauthenticated](./sketches/home/home-mobile-unauthenticated.png)
+
+  ![Home Desktop Unauthenticated](./sketches/home/home-desktop-unauthenticated.png)
+
+  ![Home Mobile Authenticated](./sketches/home/home-mobile-authenticated.png)
+
+  ![Home Desktop Authenticated](./sketches/home/home-desktop-authenticated.png)
+
 - **Video Detail Page** - `/video/[video-id]`
+
   - Video player UI with playback controls.
   - Inline video editing functionality.
   - Comment section with a form for new comments.
+
+  ![Video Mobile](./sketches/video/video-mobile.png)
+
+  ![Video Desktop](./sketches/video/video-desktop.png)
+
+  ![Video Mobile Editing](./sketches/video/video-mobile-editing.png)
+
+  ![Video Desktop Editing](./sketches/video/video-desktop-editing.png)
+
 - **Upload Page** - `/upload`
+
   - Simple and intuitive form for video submissions.
   - Easier to manage than a modal, allows for separation of concerns and extensibility.
+
+  ![Upload Mobile](./sketches/upload/upload-mobile.png)
+
+  ![Upload Desktop](./sketches/upload/upload-desktop.png)
+
 - **Login Page** - `/login`
+
   - Simple form allowing users to log in with first and last name.
   - First and last name required for successful login.
+
+  ![Login Mobile](./sketches/login/login-mobile.png)
+
+  ![Login Desktop](./sketches/login/login-desktop.png)
+
 - **404 Page** - `/[any-invalid-url]`
+
   - Catch invalid URLs and provide CTA to navigate back to the home page.
+
+  ![404 Mobile](./sketches/404/404-mobile.png)
+
+  ![404 Desktop](./sketches/404/404-desktop.png)
 
 ---
 
