@@ -13,6 +13,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useNotification } from "@/context/NotificationContext";
 import { containsProfanity } from "@/utils/profanityFilter";
 import { useRouter } from "next/navigation";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function UploadPage() {
   const { userId } = useAuth(); // Retrieve user_id from context
@@ -75,20 +76,23 @@ export default function UploadPage() {
 
     try {
       // Make a POST request to upload the video
-      const response = await fetch("/videos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: userId,
-          title,
-          description,
-          video_url: videoUrl,
-        }),
-      });
+      // const response = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/videos`,
+      //   {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify({
+      //       user_id: userId,
+      //       title,
+      //       description,
+      //       video_url: videoUrl,
+      //     }),
+      //   }
+      // );
 
-      if (!response.ok) {
-        throw new Error("Upload failed.");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Upload failed.");
+      // }
 
       setNotification({
         message: "Video uploaded successfully!",
@@ -106,66 +110,68 @@ export default function UploadPage() {
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{
-        maxWidth: "500px",
-        margin: "0 auto",
-        p: 3,
-        mt: 4,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
-    >
-      <Typography variant="h4" component="h1" align="center">
-        Upload a Video
-      </Typography>
-      <TextField
-        label="Video Title"
-        variant="outlined"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-        error={errors.title || errors.profanityTitle}
-        helperText={
-          errors.title
-            ? "Title is required"
-            : errors.profanityTitle
-            ? "Please avoid using inappropriate words"
-            : ""
-        }
-      />
-      <TextField
-        label="Video Description"
-        variant="outlined"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-        error={errors.description || errors.profanityDescription}
-        helperText={
-          errors.description
-            ? "Description is required"
-            : errors.profanityDescription
-            ? "Please avoid using inappropriate words"
-            : ""
-        }
-        multiline
-        rows={3}
-      />
-      <TextField
-        label="Video URL"
-        variant="outlined"
-        value={videoUrl}
-        onChange={(e) => setVideoUrl(e.target.value)}
-        required
-        error={errors.videoUrl}
-        helperText={errors.videoUrl ? "Please enter a valid URL" : ""}
-      />
-      <Button variant="contained" type="submit">
-        Upload Video
-      </Button>
-    </Box>
+    <ProtectedRoute>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          maxWidth: "500px",
+          margin: "0 auto",
+          p: 3,
+          mt: 4,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        <Typography variant="h4" component="h1" align="center">
+          Upload a Video
+        </Typography>
+        <TextField
+          label="Video Title"
+          variant="outlined"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          error={errors.title || errors.profanityTitle}
+          helperText={
+            errors.title
+              ? "Title is required"
+              : errors.profanityTitle
+              ? "Please avoid using inappropriate words"
+              : ""
+          }
+        />
+        <TextField
+          label="Video Description"
+          variant="outlined"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          error={errors.description || errors.profanityDescription}
+          helperText={
+            errors.description
+              ? "Description is required"
+              : errors.profanityDescription
+              ? "Please avoid using inappropriate words"
+              : ""
+          }
+          multiline
+          rows={3}
+        />
+        <TextField
+          label="Video URL"
+          variant="outlined"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+          required
+          error={errors.videoUrl}
+          helperText={errors.videoUrl ? "Please enter a valid URL" : ""}
+        />
+        <Button variant="contained" type="submit">
+          Upload Video
+        </Button>
+      </Box>
+    </ProtectedRoute>
   );
 }
