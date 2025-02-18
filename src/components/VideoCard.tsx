@@ -1,5 +1,9 @@
 // src/components/VideoCard.tsx
-import { CommentOutlined, PersonOutline } from "@mui/icons-material";
+import {
+  AccessTimeOutlined,
+  CommentOutlined,
+  PersonOutline,
+} from "@mui/icons-material";
 import {
   Card,
   CardContent,
@@ -10,6 +14,7 @@ import {
   Stack,
 } from "@mui/material";
 import Link from "next/link";
+import { timeAgo } from "@/utils/timestamps";
 
 interface Video {
   id: string;
@@ -18,7 +23,7 @@ interface Video {
   video_url: string;
   user_id: string;
   num_comments: number;
-  thumbnail_url?: string;
+  created_at: string;
 }
 
 interface VideoCardProps {
@@ -77,15 +82,23 @@ const VideoCard = ({ video }: VideoCardProps) => {
               gap: 2,
               mb: 1,
             }}
+            color="text.secondary"
           >
             <Stack direction="row" alignItems="center" gap={0.5}>
               <PersonOutline />
-              <Typography variant="body1">{video.user_id}</Typography>
+              <Typography variant="body2">{video.user_id}</Typography>
             </Stack>
 
             <Stack direction="row" alignItems="center" gap={0.5}>
               <CommentOutlined />
-              <Typography variant="body1">{video.num_comments}</Typography>
+              <Typography variant="body2">{video.num_comments}</Typography>
+            </Stack>
+
+            <Stack direction="row" alignItems="center" gap={0.5}>
+              <AccessTimeOutlined />
+              <Typography variant="body2">
+                {timeAgo(video.created_at)}
+              </Typography>
             </Stack>
           </Box>
           <Typography
@@ -95,7 +108,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: 3, // Limit to 6 lines
+              WebkitLineClamp: 3, // Limit to 3 lines
               WebkitBoxOrient: "vertical",
             }}
           >

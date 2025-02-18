@@ -1,23 +1,29 @@
-import {
-  Container,
-  Typography,
-  Stack,
-  Box,
-  Divider,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Container, Typography, Stack, Divider } from "@mui/material";
 import { PersonOutline } from "@mui/icons-material";
 import VideoPlayer from "@/components/VideoPlayer";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import CommentContainer from "@/components/CommentContainer";
+
+export type Video = {
+  id: string;
+  title: string;
+  description: string;
+  video_url: string;
+  user_id: string;
+  num_comments: number;
+  created_at: string;
+};
 
 const Video = async ({ params }: { params: Promise<{ id: string }> }) => {
+  // Get video ID from URL params
   const id = (await params).id;
 
+  // Fetch video data from API
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/videos/single?video_id=${id}`
   );
-  const { video } = await res.json();
+  const data = await res.json();
+  const video: Video = data.video;
 
   return (
     <Container
@@ -48,21 +54,9 @@ const Video = async ({ params }: { params: Promise<{ id: string }> }) => {
         </Stack>
 
         <Divider sx={{ my: 4 }} />
-        <Stack spacing={2}>
-          <Typography variant="h5" component="h2">
-            Comments
-          </Typography>
-          <TextField label="Write a comment" multiline rows={3} />
-          <Button
-            variant="contained"
-            sx={{
-              maxWidth: { xs: "initial", sm: "max-content" },
-              alignSelf: { xs: "initial", sm: "end" },
-            }}
-          >
-            Post
-          </Button>
-        </Stack>
+
+        {/* Display comments */}
+        <CommentContainer videoId={id} />
       </ProtectedRoute>
     </Container>
   );
