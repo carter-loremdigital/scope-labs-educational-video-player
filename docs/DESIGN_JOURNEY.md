@@ -73,6 +73,12 @@ An EdTech company has tasked me with developing a simple web application that al
 - **Why?** Enhances the viewing experience and accommodates different learning speeds.
 - **Implementation Notes**: Utilize Next.js client components for video playback, ensuring smooth interactivity.
 
+### Video Search, Sort, & Filter
+
+- **What?** An interface for users to search videos by title and sort by date posted or number of comments.
+- **Why?** Provides the user with more granular search tools to explore videos on the platform.
+- **Implementation Notes**: Pass videos to a client component and handle search/filter logic on the client.
+
 ### Video Editing
 
 - **What?** A system for allowing users to make seamless updates to the title, description, and URL of their uploaded videos.
