@@ -12,7 +12,6 @@ import {
   Select,
   MenuItem,
   Divider,
-  Paper,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Clear, Search } from "@mui/icons-material";
@@ -87,31 +86,26 @@ export default function VideoDashboard({ videos }: { videos: Video[] }) {
   return (
     <Container maxWidth="lg" sx={{ p: 4 }}>
       <Stack
-        // component={Stack}
-        // sx={{
-        //   direction: { sm: "row" },
-        // }}
         direction={{ sm: "row" }}
         justifyContent="space-between"
-        alignItems="center"
-        // p={2}
-        // mb={4}
+        alignItems="end"
       >
-        <Stack spacing={0}>
-          <Typography variant="h4" component="h1" mb={0} gutterBottom>
+        <Stack
+          direction={{ xs: "row", sm: "column", md: "row" }}
+          alignItems="baseline"
+          justifyContent="space-between"
+          width={{ xs: "100%", sm: "initial" }}
+          spacing={{ md: 2 }}
+          mb={{ xs: 1, sm: "initial" }}
+          mr={{ sm: 2 }}
+        >
+          <Typography variant="h4" component="h1" mb={0} gutterBottom noWrap>
             Your Videos
           </Typography>
-          {/* {searchQuery && ( */}
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={
-              {
-                // alignSelf: "end",
-              }
-            }
           >{`${filteredVideos.length} results`}</Typography>
-          {/* )} */}
         </Stack>
         <Stack
           direction={{ sm: "row" }}

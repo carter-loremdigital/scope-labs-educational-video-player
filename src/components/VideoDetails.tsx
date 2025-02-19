@@ -133,7 +133,7 @@ const VideoDetails = ({
   };
 
   return (
-    <>
+    <Stack>
       {edit ? (
         <Stack component="form" spacing={2}>
           <Typography variant="h4" component="h1">
@@ -171,7 +171,11 @@ const VideoDetails = ({
             multiline
             rows={3}
           />
-          <Stack direction="row" spacing={2}>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ maxWidth: { xs: "100%", sm: "50%" } }}
+          >
             <Button
               type="submit"
               onClick={handleSubmit}
@@ -197,7 +201,7 @@ const VideoDetails = ({
           </Stack>
         </Stack>
       ) : (
-        <>
+        <Stack spacing={1}>
           <Typography variant="h4" component="h1">
             {title}
           </Typography>
@@ -213,22 +217,22 @@ const VideoDetails = ({
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
-        </>
+        </Stack>
       )}
-
       {userId === authId && !edit && (
         <Button
           variant="contained"
           onClick={() => setEdit(true)}
           startIcon={<Edit />}
           sx={{
-            width: "50%",
+            width: { xs: "50%", sm: "25%" },
+            marginTop: 2,
           }}
         >
           Edit
         </Button>
       )}
-    </>
+    </Stack>
   );
 };
 

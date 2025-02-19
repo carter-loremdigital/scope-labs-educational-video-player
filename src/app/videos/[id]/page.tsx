@@ -1,10 +1,10 @@
-import { Container, Typography, Stack, Divider } from "@mui/material";
-import { PersonOutline } from "@mui/icons-material";
+import { Container, Stack, Divider } from "@mui/material";
 import VideoPlayer from "@/components/VideoPlayer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import CommentContainer from "@/components/CommentContainer";
 import VideoDetails from "@/components/VideoDetails";
 import { Video } from "@/components/VideoDashboard";
+import BackLink from "@/components/BackLink";
 
 const VideoPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   // Get video ID from URL params
@@ -18,13 +18,16 @@ const VideoPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const video: Video = data.video;
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{
-        p: 4,
-      }}
-    >
-      <ProtectedRoute>
+    <ProtectedRoute>
+      <Container
+        maxWidth="md"
+        sx={{
+          p: 4,
+        }}
+      >
+        <BackLink text="Back to Videos" href="/" />
+
+        {/* Video player */}
         <VideoPlayer video={video} />
 
         <Stack
@@ -47,8 +50,8 @@ const VideoPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         {/* Display comments */}
         <CommentContainer videoId={id} />
-      </ProtectedRoute>
-    </Container>
+      </Container>
+    </ProtectedRoute>
   );
 };
 

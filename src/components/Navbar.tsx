@@ -22,12 +22,35 @@ const Navbar = () => {
 
         {firstName ? (
           // Authenticated user
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <Typography>Hi, {firstName}</Typography>
-            <Button href="/upload" color="inherit" startIcon={<Add />}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 1, sm: 2 },
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                display: { xs: "none", sm: "initial" },
+              }}
+            >
+              Hi, {firstName}
+            </Typography>
+            <Button
+              variant="text"
+              href="/upload"
+              color="inherit"
+              startIcon={<Add />}
+            >
               Upload
             </Button>
-            <Button color="inherit" startIcon={<Logout />} onClick={logout}>
+            <Button
+              variant="text"
+              color="inherit"
+              startIcon={<Logout />}
+              onClick={logout}
+            >
               Log Out
             </Button>
           </Box>

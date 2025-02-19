@@ -1,15 +1,14 @@
 // src/components/VideoCard.tsx
 import {
-  AccessTimeOutlined,
-  CommentOutlined,
-  PersonOutline,
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  Circle,
 } from "@mui/icons-material";
 import {
   Card,
   CardContent,
   CardMedia,
   Typography,
-  Box,
   Link as MUILink,
   Stack,
 } from "@mui/material";
@@ -64,19 +63,26 @@ const VideoCard = ({ video }: { video: Video }) => {
             {video.title}
           </Typography>
 
-          <Stack direction="row" spacing={1} color="text.secondary" mb={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            color="text.secondary"
+            mb={1}
+          >
             <Stack direction="row" alignItems="center" gap={0.5}>
-              <PersonOutline />
+              <AccountCircleOutlined fontSize="small" />
               <Typography variant="body2">{video.user_id}</Typography>
             </Stack>
+
+            <Circle sx={{ width: "4px", height: "4px" }} />
+
+            <Typography variant="body2">{timeAgo(video.created_at)}</Typography>
+
+            <Circle sx={{ width: "4px", height: "4px" }} />
+
             <Stack direction="row" alignItems="center" gap={0.5}>
-              <AccessTimeOutlined />
-              <Typography variant="body2">
-                {timeAgo(video.created_at)}
-              </Typography>
-            </Stack>
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <CommentOutlined />
+              <ChatBubbleOutline fontSize="small" />
               <Typography variant="body2">{video.num_comments}</Typography>
             </Stack>
           </Stack>
