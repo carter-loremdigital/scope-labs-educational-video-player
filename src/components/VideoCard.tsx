@@ -19,10 +19,26 @@ import { Video } from "./VideoDashboard";
 const VideoCard = ({ video }: { video: Video }) => {
   // const thumbnail = video.video_url.includes("www.youtube.com") ? `http://i3.ytimg.com/vi/erLk59H86ww/hqdefault.jpg` : "";
 
-  var thumbnailUrl = "";
+  // Supports YouTube, Vimeo, and DailyMotion thumbnails w/ fallback thumbnail image
+  let thumbnailUrl;
+
+  // Get YouTube thumbnail
   if (video.video_url.includes("https://www.youtube.com")) {
     const videoId = video.video_url.split("=")[1];
     thumbnailUrl = `http://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+    // Get Vimeo Thumbnail (provided by https://vumbnail.com/)
+  } else if (video.video_url.includes("https://vimeo.com")) {
+    const videoId = video.video_url.split("/").pop();
+    thumbnailUrl = `https://vumbnail.com/${videoId}.jpg`;
+
+    // Get DailyMotion thumbnail
+  } else if (video.video_url.includes("https://www.dailymotion.com")) {
+    const videoId = video.video_url.split("/").pop();
+    thumbnailUrl = `https://www.dailymotion.com/thumbnail/video/${videoId}`;
+  } else {
+    // Default to EduStream thumbnail image
+    thumbnailUrl = "/thumbnail.svg";
   }
 
   return (

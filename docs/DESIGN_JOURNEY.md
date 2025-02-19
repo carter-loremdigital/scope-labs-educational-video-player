@@ -73,23 +73,23 @@ An EdTech company has tasked me with developing a simple web application that al
 - **Why?** Enhances the viewing experience and accommodates different learning speeds.
 - **Implementation Notes**: Utilize Next.js client components for video playback, ensuring smooth interactivity.
 
-### Video Search, Sort, & Filter
+### Video Search & Sort
 
-- **What?** An interface for users to search videos by title and sort by date posted or number of comments.
+- **What?** An interface for users to search videos by title and description and sort by date posted or number of comments.
 - **Why?** Provides the user with more granular search tools to explore videos on the platform.
-- **Implementation Notes**: Pass videos to a client component and handle search/filter logic on the client.
+- **Implementation Notes**: Pass videos to a client component and handle search/sort logic on the client.
 
 ### Video Editing
 
-- **What?** A system for allowing users to make seamless updates to the title, description, and URL of their uploaded videos.
+- **What?** A system for allowing users to make seamless updates to the title and description of their uploaded videos.
 - **Why?** Gives users control over their content, allowing them to make revisions or edit mistakes in their content.
-- **Implementation Notes**: Allow users to edit video content inline for seamless UX.
+- **Implementation Notes**: Allow users to edit video content inline for a seamless UX.
 
 ### Commenting System
 
 - **What?** Users can add comments and view existing ones.
 - **Why?** Encourages discussions and engagement.
-- **Implementation Notes**: Refresh comments for real-time updates.
+- **Implementation Notes**: Refresh comments in the background for real-time updates.
 
 ---
 
@@ -110,7 +110,7 @@ An EdTech company has tasked me with developing a simple web application that al
 
   - Dynamically display content based on user's "authentication" state.
   - **Unauthenticated Users**: Visually appealing hero section with informative content & login CTA.
-  - **Authenticated Users**: Video dashboard displaying their videos in a grid format.
+  - **Authenticated Users**: Fetch videos and display a video dashboard of their videos in a grid format.
 
   ![Home Mobile Unauthenticated](./sketches/home/home-mobile-unauthenticated.png)
 
@@ -164,13 +164,13 @@ An EdTech company has tasked me with developing a simple web application that al
 
 ## Technology Stack & Justification
 
-| Technology                                                     | Purpose                      | Justification                                                                                                                                                         |
-| -------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Next.js 15**                                                 | Frontend framework           | Hybrid rendering (SSR + CSR) for optimal performance                                                                                                                  |
-| **MUI (Material UI)**                                          | UI component library         | Pre-built components to ensure a polished UI with accessibility features                                                                                              |
-| **React Context**                                              | Client-side state management | Simplest option for managing the user's "authentication" state                                                                                                        |
-| [**react-player**](https://www.npmjs.com/package/react-player) | Video playback & controls    | Flexible, lightweight, and responsive option for a robust video player with built-in controls                                                                         |
-| [**obscenity**](https://www.npmjs.com/package/obscenity)       | Profanity filter             | Users should not be allowed to upload profane content, including video titles, descriptions, and comments to an educational platform potentially targeted at children |
+| Technology                                                     | Purpose                      | Justification                                                                                                                                                         | Limitations                           |
+| -------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **Next.js 15**                                                 | Frontend framework           | Hybrid rendering (SSR + CSR) for optimal performance                                                                                                                  |                                       |
+| **MUI (Material UI)**                                          | UI component library         | Pre-built components to ensure a polished UI with accessibility features                                                                                              |                                       |
+| **React Context**                                              | Client-side state management | Simplest option for managing the user's "authentication" state                                                                                                        |                                       |
+| [**react-player**](https://www.npmjs.com/package/react-player) | Video playback & controls    | Flexible, lightweight, and responsive option for a robust video player with built-in controls                                                                         | No longer supports DailyMotion videos |
+| [**obscenity**](https://www.npmjs.com/package/obscenity)       | Profanity filter             | Users should not be allowed to upload profane content, including video titles, descriptions, and comments to an educational platform potentially targeted at children |                                       |
 
 ---
 
@@ -206,7 +206,6 @@ An EdTech company has tasked me with developing a simple web application that al
 ### 4. Testing & Deployment
 
 - Conduct user testing to refine the experience.
-- Deploy on **Vercel** for a production-ready demo.
 - Write a **README** with setup instructions, features, and screenshots.
 
 ---
@@ -215,6 +214,7 @@ An EdTech company has tasked me with developing a simple web application that al
 
 - Users are limited to viewing and interacting with only the videos they have uploaded.
 - The API does not support server-side authentication or authorization.
+- DailyMotion videos will not play due to updates in their embedding protocols.
 
 ---
 
