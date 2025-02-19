@@ -4,18 +4,9 @@ import VideoPlayer from "@/components/VideoPlayer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import CommentContainer from "@/components/CommentContainer";
 import VideoDetails from "@/components/VideoDetails";
+import { Video } from "@/components/VideoDashboard";
 
-export type Video = {
-  id: string;
-  title: string;
-  description: string;
-  video_url: string;
-  user_id: string;
-  num_comments: number;
-  created_at: string;
-};
-
-const Video = async ({ params }: { params: Promise<{ id: string }> }) => {
+const VideoPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   // Get video ID from URL params
   const id = (await params).id;
 
@@ -61,4 +52,4 @@ const Video = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
-export default Video;
+export default VideoPage;

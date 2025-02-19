@@ -4,6 +4,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { revalidateHome } from "../actions";
 
 export default function LoginPage() {
   const [firstName, setFirstName] = useState("");
@@ -27,6 +28,7 @@ export default function LoginPage() {
 
     // Store user data in auth context
     setUser(firstName, lastName);
+    revalidateHome(); // Refresh home page before redirecting to show video dashboard
     router.push("/"); // Redirect to home page
   };
 

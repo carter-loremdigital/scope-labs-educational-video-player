@@ -62,36 +62,77 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [firstName, lastName, userId]);
 
   // setUser function to set global auth state
-  // Update localStorage immediately in setUser
-  const setUser = (firstName: string, lastName: string) => {
-    setFirstName(firstName);
-    setLastName(lastName);
+  // Set cookie and update localStorage immediately in setUser
+  const setUser = async (firstName: string, lastName: string) => {
     const computedUserId = `${firstName.trim().toLowerCase()}_${lastName
       .trim()
       .toLowerCase()}`;
-    setUserId(computedUserId);
-    localStorage.setItem(
-      "authData",
-      JSON.stringify({ firstName, lastName, userId: computedUserId })
-    );
-    setNotification({
-      message: `Logged in as ${computedUserId}`,
-      severity: "success",
-    });
+
+    try {
+      // Set authentication cookie
+      // We need this to access the user's ID in server components
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: computedUserId }),
+      });
+
+      // Catch API errors
+      if (!res.ok) {
+        throw new Error("Login failed");
+      }
+
+      // If setting cookie succeeds, set client auth state (logged in)
+      setFirstName(firstName);
+      setLastName(lastName);
+      setUserId(computedUserId);
+      localStorage.setItem(
+        "authData",
+        JSON.stringify({ firstName, lastName, userId: computedUserId })
+      );
+
+      // Display login success notification
+      setNotification({
+        message: `Logged in as ${computedUserId}`,
+        severity: "success",
+      });
+    } catch (error) {
+      // Log error & display login error message
+      console.error("Login API error:", error);
+      setNotification({ message: "Login API error", severity: "error" });
+    }
   };
 
   // logout function clears global auth state
-  // Clear state and localStorage immediately in logout
-  const logout = () => {
-    setFirstName("");
-    setLastName("");
-    setUserId("");
-    localStorage.removeItem("authData");
-    setNotification({
-      message: "Logged out successfully.",
-      severity: "success",
-    });
-    router.push("/"); // Redirect user to home page after logout
+  // Clear cookies, state, and localStorage immediately in logout
+  const logout = async () => {
+    try {
+      // Remove authentication cookie
+      const res = await fetch("/api/logout", {
+        method: "POST",
+      });
+
+      // Catch API errors
+      if (!res.ok) {
+        throw new Error("Logout failed");
+      }
+
+      // If removing cookie succeeds, set client auth state (logged out)
+      setFirstName("");
+      setLastName("");
+      setUserId("");
+      localStorage.removeItem("authData");
+      // revalidateHome();
+
+      setNotification({
+        message: "Logged out successfully.",
+        severity: "success",
+      });
+      router.push("/"); // Redirect user to home page after logout
+    } catch (error) {
+      console.error("Logout API error:", error);
+      setNotification({ message: "Logout API error", severity: "error" });
+    }
   };
 
   return (

@@ -15,22 +15,9 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { timeAgo } from "@/utils/timestamps";
+import { Video } from "./VideoDashboard";
 
-interface Video {
-  id: string;
-  title: string;
-  description: string;
-  video_url: string;
-  user_id: string;
-  num_comments: number;
-  created_at: string;
-}
-
-interface VideoCardProps {
-  video: Video;
-}
-
-const VideoCard = ({ video }: VideoCardProps) => {
+const VideoCard = ({ video }: { video: Video }) => {
   // const thumbnail = video.video_url.includes("www.youtube.com") ? `http://i3.ytimg.com/vi/erLk59H86ww/hqdefault.jpg` : "";
 
   var thumbnailUrl = "";
@@ -70,7 +57,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: 2, // Limit to 6 lines
+              WebkitLineClamp: 2, // Limit to 2 lines
               WebkitBoxOrient: "vertical",
             }}
           >

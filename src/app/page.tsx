@@ -1,11 +1,22 @@
-import Home from "@/components/Home";
+import { cookies } from "next/headers";
 import VideoDashboard from "@/components/VideoDashboard";
+import Hero from "@/components/Hero";
 
-export default function HomePage() {
-  return (
-    <Home>
-      {/* Pass video dashboard (server component) to Home (client component) for conditional rendering */}
-      <VideoDashboard />
-    </Home>
-  );
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const authCookie = cookieStore.get("authToken");
+  let userId: string | null = null;
+
+  let videos;
+  if (authCookie) {
+    // Since we're storing a plain string userId, we can use the value directly.
+    userId = authCookie.value;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/videos?user_id=${userId}`
+    );
+    const data = await res.json(); // Assuming this returns an array of video objects
+    videos = data.videos;
+  }
+
+  return <>{userId ? <VideoDashboard videos={videos} /> : <Hero />}</>;
 }
