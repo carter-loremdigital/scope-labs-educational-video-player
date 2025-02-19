@@ -63,31 +63,23 @@ const VideoCard = ({ video }: { video: Video }) => {
           >
             {video.title}
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              mb: 1,
-            }}
-            color="text.secondary"
-          >
+
+          <Stack direction="row" spacing={1} color="text.secondary" mb={1}>
             <Stack direction="row" alignItems="center" gap={0.5}>
               <PersonOutline />
               <Typography variant="body2">{video.user_id}</Typography>
             </Stack>
-
-            <Stack direction="row" alignItems="center" gap={0.5}>
-              <CommentOutlined />
-              <Typography variant="body2">{video.num_comments}</Typography>
-            </Stack>
-
             <Stack direction="row" alignItems="center" gap={0.5}>
               <AccessTimeOutlined />
               <Typography variant="body2">
                 {timeAgo(video.created_at)}
               </Typography>
             </Stack>
-          </Box>
+            <Stack direction="row" alignItems="center" gap={0.5}>
+              <CommentOutlined />
+              <Typography variant="body2">{video.num_comments}</Typography>
+            </Stack>
+          </Stack>
           <Typography
             variant="body2"
             color="text.secondary"

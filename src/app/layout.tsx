@@ -8,13 +8,8 @@ import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
 import { NotificationProvider } from "@/context/NotificationContext";
 import NotificationSnackbar from "@/components/NotificationSnackbar";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto",
-});
+import "@fontsource/poppins";
+import "@fontsource/outfit";
 
 export const metadata: Metadata = {
   title: "EduStream",
@@ -28,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>
+      <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

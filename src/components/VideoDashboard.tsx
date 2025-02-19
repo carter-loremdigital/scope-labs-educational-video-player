@@ -1,6 +1,21 @@
 "use client";
-import { Container, Typography } from "@mui/material";
+import { useState, useMemo } from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  InputAdornment,
+  IconButton,
+  Stack,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider,
+  Paper,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { Clear, Search } from "@mui/icons-material";
 import VideoCard from "@/components/VideoCard";
 import { testData } from "@/data/videos";
 
@@ -14,12 +29,142 @@ export type Video = {
   created_at: string;
 };
 
+// Union type for sort options
+type SortOption =
+  | "alpha-asc"
+  | "alpha-desc"
+  | "date-newest"
+  | "date-oldest"
+  | "comments-high"
+  | "comments-low";
+
 export default function VideoDashboard({ videos }: { videos: Video[] }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState<SortOption>("date-newest");
+
+  // Filter videos based on search query (case-insensitive, searches title and description)
+  const filteredVideos = useMemo(() => {
+    let filtered = videos;
+    if (searchQuery.trim()) {
+      filtered = videos.filter(
+        (video) =>
+          video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          video.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Sort videos based on the selected option
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortOption) {
+        case "alpha-asc":
+          return a.title.localeCompare(b.title);
+        case "alpha-desc":
+          return b.title.localeCompare(a.title);
+        case "date-newest":
+          // Newest first: descending order
+          return (
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+        case "date-oldest":
+          // Oldest first: ascending order
+          return (
+            new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+          );
+        case "comments-high":
+          // Highest number of comments first.
+          return b.num_comments - a.num_comments;
+        case "comments-low":
+          // Lowest number of comments first.
+          return a.num_comments - b.num_comments;
+        default:
+          return 0;
+      }
+    });
+
+    return sorted;
+  }, [searchQuery, sortOption, videos]);
+
   return (
     <Container maxWidth="lg" sx={{ p: 4 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Your Videos
-      </Typography>
+      <Stack
+        // component={Stack}
+        // sx={{
+        //   direction: { sm: "row" },
+        // }}
+        direction={{ sm: "row" }}
+        justifyContent="space-between"
+        alignItems="center"
+        // p={2}
+        // mb={4}
+      >
+        <Stack spacing={0}>
+          <Typography variant="h4" component="h1" mb={0} gutterBottom>
+            Your Videos
+          </Typography>
+          {/* {searchQuery && ( */}
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={
+              {
+                // alignSelf: "end",
+              }
+            }
+          >{`${filteredVideos.length} results`}</Typography>
+          {/* )} */}
+        </Stack>
+        <Stack
+          direction={{ sm: "row" }}
+          width={{ xs: "100%", sm: "initial" }}
+          spacing={2}
+        >
+          <TextField
+            variant="outlined"
+            placeholder="Search videos..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <IconButton onClick={() => setSearchQuery("")}>
+                    <Clear />
+                  </IconButton>
+                ),
+              },
+            }}
+            sx={{ mb: 4, width: { xs: "100%", sm: "initial" } }}
+          />
+
+          <FormControl>
+            <InputLabel id="sort-label">Sort by</InputLabel>
+            <Select
+              labelId="sort-label"
+              value={sortOption}
+              label="Sort by"
+              onChange={(e) => setSortOption(e.target.value as SortOption)}
+            >
+              <MenuItem value="date-newest">
+                Date Posted (Newest First)
+              </MenuItem>
+              <MenuItem value="date-oldest">
+                Date Posted (Oldest First)
+              </MenuItem>
+              <MenuItem value="alpha-asc">Alphabetical (A–Z)</MenuItem>
+              <MenuItem value="alpha-desc">Alphabetical (Z–A)</MenuItem>
+              <MenuItem value="comments-high">Comments (High to Low)</MenuItem>
+              <MenuItem value="comments-low">Comments (Low to High)</MenuItem>
+            </Select>
+          </FormControl>
+        </Stack>
+      </Stack>
+
+      <Divider sx={{ my: 2 }} />
+
       <Grid
         container
         spacing={2}
@@ -27,12 +172,12 @@ export default function VideoDashboard({ videos }: { videos: Video[] }) {
           alignItems: "stretch",
         }}
       >
-        {!videos.length && (
+        {!filteredVideos.length && !searchQuery && (
           <Typography variant="body1" color="text.secondary">
             You don't have any videos yet. Upload to get started!
           </Typography>
         )}
-        {videos.map((video: any) => (
+        {filteredVideos.map((video: any) => (
           <Grid key={video.id} size={{ xs: 12, sm: 6, md: 4 }}>
             <VideoCard video={video} />
           </Grid>
