@@ -21,6 +21,7 @@ const CommentForm = ({ videoId, refetch }: CommentFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     // Check comment for content and profanity
     const commentError = comment.trim() === "";
     const profanityError = containsProfanity(comment);

@@ -48,6 +48,7 @@ let theme = createTheme({
   cssVariables: true,
 });
 
+// Responsive font sizes
 theme = responsiveFontSizes(theme);
 
 export default theme;

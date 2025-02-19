@@ -1,6 +1,6 @@
 "use client";
 import ReactPlayer from "react-player";
-import { Video } from "@/app/videos/[id]/page";
+import { Video } from "./VideoDashboard";
 import styles from "@/app/videos/[id]/styles.module.css";
 
 const VideoPlayer = ({ video }: { video: Video }) => {

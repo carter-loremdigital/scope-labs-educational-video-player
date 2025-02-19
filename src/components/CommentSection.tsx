@@ -52,7 +52,7 @@ const CommentSection = ({
   comments: CommentType[];
   loading: boolean;
 }) => {
-  // Render comment skeletons
+  // Render comment skeletons during intial loading
   if (loading) {
     return (
       <Stack>

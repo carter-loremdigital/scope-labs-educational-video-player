@@ -26,6 +26,7 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     setLoading(true);
     e.preventDefault();
+
     // Validate required fields
     const firstNameError = firstName.trim() === "";
     const lastNameError = lastName.trim() === "";

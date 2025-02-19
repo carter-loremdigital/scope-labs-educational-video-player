@@ -17,8 +17,6 @@ import { timeAgo } from "@/utils/timestamps";
 import { Video } from "./VideoDashboard";
 
 const VideoCard = ({ video }: { video: Video }) => {
-  // const thumbnail = video.video_url.includes("www.youtube.com") ? `http://i3.ytimg.com/vi/erLk59H86ww/hqdefault.jpg` : "";
-
   // Supports YouTube, Vimeo, and DailyMotion thumbnails w/ fallback thumbnail image
   let thumbnailUrl;
 
@@ -109,7 +107,7 @@ const VideoCard = ({ video }: { video: Video }) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: 3, // Limit to 3 lines
+              WebkitLineClamp: 2, // Limit to 2 lines
               WebkitBoxOrient: "vertical",
             }}
           >

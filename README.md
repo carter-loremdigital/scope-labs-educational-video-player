@@ -1,38 +1,151 @@
-# scope-labs-educational-video-player
+# Educational Video Player
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
 
-## Getting Started
+This repository contains my solution for the Scope Labs Educational Video Player assessment. The application is built using Next.js 15 with TypeScript and MUI, leveraging Next.js's hybrid rendering (server and client components) for optimal performance and SEO.
 
-First, run the development server:
+### Design Document & Sketches
+
+- [**Design Document**](./docs/DESIGN_JOURNEY.md):
+  Outlines design motivations, tradeoffs, and decisions made throughout the design and development process.
+- [**Sketches**](./docs/sketches/):
+  Initial UI sketches for each page.
+
+### Video Walkthrough
+
+A video demonstrating the platforms UI and key features.
+
+TODO
+
+### Key Features
+
+- **User Authentication:**  
+  Simulated login using first and last name, managed via React Context (client-side) with a secure cookie approach for server-side checks and data fetching.
+
+- **Video Dashboard:**  
+  A dynamic video dashboard that displays a list of videos in a responsive grid layout, complete with search and sort functionalities (alphabetical, date posted, and number of comments).
+
+- **Video Playback & Editing:**  
+  Integrated video playback using `react-player` with full-screen mode, playback speed, and volume controls. Users can edit video details inline and see their changes reflected immediately. The player supports video playback from files, YouTube, Facebook, Twitch, SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, and Kaltura. Read more about platform support in the [React Player docs](https://www.npmjs.com/package/react-player).
+
+- **Video Upload:**  
+  A simple and intuitive form for uploading videos with title, description, and URL validation. Video titles and descriptions are validated for profanity before being posted.
+
+- **Commenting System:**  
+  Users can post and view comments on videos. The system employs immediate background revalidation to provide a seamless, real-time experience. Comments are validated for profanity before being posted.
+
+- **Global Notification System:**  
+  Toast messages using MUI Snackbar and React Context provide user feedback for actions like login/logout, uploads, and edits.
+
+- **Protected Pages:**  
+  Client-side and server-side techniques ensure that only authenticated users can access certain pages (e.g., the Video Dashboard and Video Upload).
+
+- **Mobile Responsiveness**:
+  All pages and components are fully responsive for use across devices of any screen size.
+
+---
+
+## Build and Run Instructions
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/carter-loremdigital/scope-labs-educational-video-player.git
+    cd educational-video-player
+    ```
+2.  Install dependencies:
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  Configure Environment Variables:
+
+    Create a `.env` file in the root directory and add the following (replace with your actual API URL):
+
+    ```
+    NEXT_PUBLIC_API_URL=https://your-api-url.com/api
+    ```
+
+### Running the Application
+
+Run the start command in your terminal:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Screenshots
 
-## Learn More
+### Home Page (Unauthenticated)
 
-To learn more about Next.js, take a look at the following resources:
+![Home Page (Unauthenticated)](/docs/screenshots/home-unauthenticated.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Home Page (Authenticated)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![Home Page (Authenticated)](/docs/screenshots/home-authenticated.png)
 
-## Deploy on Vercel
+### Video Detail Page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Video Detail Page](/docs/screenshots/video-details.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Video Upload Page
+
+![Video Upload Page](/docs/screenshots/upload.png)
+
+### Login Page
+
+![Login Page](/docs/screenshots/login.png)
+
+### 404 Page
+
+![404 Page](/docs/screenshots/404.png)
+
+---
+
+## Additonal Information
+
+- **Testing the Application**:
+
+  Ensure that your API endpoints are correctly configured as per the provided environment variables. The application uses simulated authentication and protected routes — log in with your first and last name to access the video dashboard, upload, and editing features.
+
+- **Code Structure**:
+
+  - `src/app/`: Contains Next.js pages using the Next.js App Router.
+  - `src/app/actions.ts`: Contains server action for page revalidation.
+  - `src/app/api/`: Contains authentication API endpoints for managing authentication cookies.
+  - `src/components/`: Contains UI components (e.g., Navbar, VideoCard, CommentSection, CommentForm, etc.).
+  - `src/context/`: Contains React Context for authentication and notifications.
+  - `src/data/`: Contains video test data.
+  - `src/styles`: Contains the MUI theme configuration.
+  - `src/utils`: Contains utility functions (e.g., for timestamp formatting and profanity filtering).
+
+- **Limitations**
+
+  - Users are limited to viewing and interacting with only the videos they have uploaded.
+  - The API does not support server-side authentication or authorization.
+  - DailyMotion videos will not work with `react-player` due to recent updates in their embedding protocols.
+
+- **Future Enhancements**:
+
+  In a production environment, additional authentication endpoints and server-side session management would be implemented to enhance security. The current solution uses client-side authentication simulation and cookies for demonstration purposes.
+
+---
+
+## Conclusion
+
+This project demonstrates a full-stack solution for the Scope Labs Educational Video Player assessment that leverages Next.js's advanced rendering techniques, a modern UI with MUI, and efficient client-side interactivity. Feel free to explore the code, and please refer to the comments and documentation within the codebase for further details on each component.

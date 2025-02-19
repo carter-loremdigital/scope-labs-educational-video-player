@@ -28,7 +28,7 @@ const VideoDetails = ({
   const { setNotification } = useNotification(); // Use notification hook to set notifications globally
 
   const [edit, setEdit] = useState(false); // Edit state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   // State variables for storing user edits
   const [editTitle, setEditTitle] = useState(title);

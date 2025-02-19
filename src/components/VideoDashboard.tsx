@@ -148,8 +148,8 @@ export default function VideoDashboard({ videos }: { videos: Video[] }) {
               <MenuItem value="date-oldest">
                 Date Posted (Oldest First)
               </MenuItem>
-              <MenuItem value="alpha-asc">Alphabetical (A–Z)</MenuItem>
-              <MenuItem value="alpha-desc">Alphabetical (Z–A)</MenuItem>
+              <MenuItem value="alpha-asc">Alphabetical (A-Z)</MenuItem>
+              <MenuItem value="alpha-desc">Alphabetical (Z-A)</MenuItem>
               <MenuItem value="comments-high">Comments (High to Low)</MenuItem>
               <MenuItem value="comments-low">Comments (Low to High)</MenuItem>
             </Select>

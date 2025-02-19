@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, [isInitialized, userId, router]);
 
   if (!isInitialized || !userId) {
-    // While loading or if not authenticated, return null or a loading indicator
+    // While loading or if not authenticated, return null
     return null;
   }
 

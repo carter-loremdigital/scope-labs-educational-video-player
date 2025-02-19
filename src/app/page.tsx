@@ -9,13 +9,13 @@ export default async function HomePage() {
 
   let videos;
   if (authCookie) {
-    // Since we're storing a plain string userId, we can use the value directly.
+    // Since we're storing a plain string userId, we can use the value directly
     userId = authCookie.value;
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/videos?user_id=${userId}`
     );
-    const data = await res.json(); // Assuming this returns an array of video objects
-    videos = data.videos;
+    const data = await res.json();
+    videos = data.videos; // Get videos array from response data & pass as props
   }
 
   return <>{userId ? <VideoDashboard videos={videos} /> : <Hero />}</>;

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 7, // Cookie expires in one week.
+    maxAge: 60 * 60 * 24 * 7, // Cookie expires in one week
   });
 
   return response;

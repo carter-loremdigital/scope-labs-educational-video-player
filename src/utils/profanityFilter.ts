@@ -1,6 +1,5 @@
 import {
   RegExpMatcher,
-  TextCensor,
   englishDataset,
   englishRecommendedTransformers,
 } from "obscenity";
@@ -10,6 +9,7 @@ const matcher = new RegExpMatcher({
   ...englishRecommendedTransformers,
 });
 
+// Check strings for profanity
 export const containsProfanity = (text: string) => {
   return matcher.hasMatch(text);
 };
