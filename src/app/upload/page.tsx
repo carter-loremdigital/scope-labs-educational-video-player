@@ -70,6 +70,7 @@ export default function UploadPage() {
       profanityErrorTitle ||
       profanityErrorDescription
     ) {
+      setLoading(false);
       setNotification({
         message: "Please fix the errors in the upload form.",
         severity: "error",
@@ -104,6 +105,7 @@ export default function UploadPage() {
 
       router.push("/");
     } catch (error) {
+      setLoading(false);
       console.error("Error uploading video:", error);
       setNotification({
         message: "Error uploading video. Please try again.",

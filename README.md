@@ -15,7 +15,7 @@ This repository contains my solution for the Scope Labs Educational Video Player
 
 A video demonstrating the platforms UI and key features.
 
-TODO
+[Walkthrough](https://www.loom.com/share/0a986b805ec34504a5e14675c831c6d0?sid=6574594c-65d5-4794-aa10-0316b82c6041)
 
 ### Key Features
 

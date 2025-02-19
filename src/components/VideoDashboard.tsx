@@ -125,9 +125,11 @@ export default function VideoDashboard({ videos }: { videos: Video[] }) {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                  <IconButton onClick={() => setSearchQuery("")}>
-                    <Clear />
-                  </IconButton>
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setSearchQuery("")}>
+                      <Clear />
+                    </IconButton>
+                  </InputAdornment>
                 ),
               },
             }}
