@@ -38,7 +38,7 @@ export default function LoginPage() {
     }
 
     // Store user data in auth context
-    setUser(firstName, lastName);
+    await setUser(firstName, lastName);
     await revalidateHome(); // Refresh home page before redirecting to show video dashboard
     router.push("/"); // Redirect to home page
   };
