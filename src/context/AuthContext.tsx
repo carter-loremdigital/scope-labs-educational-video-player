@@ -16,8 +16,8 @@ interface AuthContextType {
   userId: string;
   // Need to use isInitialized to prevent redirecting authenticated users before context has loaded
   isInitialized: boolean;
-  setUser: (firstName: string, lastName: string) => void;
-  logout: () => void;
+  setUser: (firstName: string, lastName: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
