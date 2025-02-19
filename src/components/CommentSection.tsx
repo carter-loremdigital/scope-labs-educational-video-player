@@ -1,4 +1,3 @@
-"use client"; // Make this a client component for added responsiveness (no need to refetch HTML from server)
 import { CommentType } from "./CommentContainer";
 import { Divider, Skeleton, Stack, Typography } from "@mui/material";
 import { PersonOutline } from "@mui/icons-material";

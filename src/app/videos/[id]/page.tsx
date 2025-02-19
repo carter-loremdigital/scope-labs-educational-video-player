@@ -3,6 +3,7 @@ import { PersonOutline } from "@mui/icons-material";
 import VideoPlayer from "@/components/VideoPlayer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import CommentContainer from "@/components/CommentContainer";
+import VideoDetails from "@/components/VideoDetails";
 
 export type Video = {
   id: string;
@@ -41,16 +42,14 @@ const Video = async ({ params }: { params: Promise<{ id: string }> }) => {
           }}
           spacing={1}
         >
-          <Typography variant="h4" component="h1">
-            {video.title}
-          </Typography>
-          <Stack direction="row" alignItems="center" gap={0.5}>
-            <PersonOutline />
-            <Typography variant="body1">{video.user_id}</Typography>
-          </Stack>
-          <Typography variant="body2" color="text.secondary">
-            {video.description}
-          </Typography>
+          {/* Display video details with edit functionality */}
+          <VideoDetails
+            userId={video.user_id}
+            title={video.title}
+            description={video.description}
+            videoId={video.id}
+            createdAt={video.created_at}
+          />
         </Stack>
 
         <Divider sx={{ my: 4 }} />

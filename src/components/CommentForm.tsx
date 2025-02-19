@@ -4,6 +4,7 @@ import { Stack, TextField, Button } from "@mui/material";
 import { useAuth } from "@/context/AuthContext";
 import { useNotification } from "@/context/NotificationContext";
 import { containsProfanity } from "@/utils/profanityFilter";
+import { revalidateHome } from "@/app/actions";
 
 type CommentFormProps = {
   videoId: string;
@@ -62,6 +63,7 @@ const CommentForm = ({ videoId, refetch }: CommentFormProps) => {
 
       // Trigger refresh of updated comments in the background
       refetch();
+      revalidateHome();
     } catch (error) {
       // Log error message
       console.error("Error posting comment:", error);
