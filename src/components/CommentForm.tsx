@@ -64,7 +64,7 @@ const CommentForm = ({ videoId, refetch }: CommentFormProps) => {
 
       // Trigger refresh of updated comments in the background
       refetch();
-      revalidateHome();
+      await revalidateHome();
     } catch (error) {
       // Log error message
       console.error("Error posting comment:", error);

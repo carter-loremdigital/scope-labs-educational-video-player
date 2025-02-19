@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);
     e.preventDefault();
 
@@ -39,7 +39,7 @@ export default function LoginPage() {
 
     // Store user data in auth context
     setUser(firstName, lastName);
-    revalidateHome(); // Refresh home page before redirecting to show video dashboard
+    await revalidateHome(); // Refresh home page before redirecting to show video dashboard
     router.push("/"); // Redirect to home page
   };
 

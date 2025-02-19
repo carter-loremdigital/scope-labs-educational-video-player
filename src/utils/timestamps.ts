@@ -1,6 +1,6 @@
 // Convert server timestamps to "... ago" timestamps
 // From StackOverflow: https://stackoverflow.com/a/72817357
-export const timeAgo = (input: any) => {
+export const timeAgo = (input: string | Date) => {
   const date = input instanceof Date ? input : new Date(input);
   const formatter = new Intl.RelativeTimeFormat("en");
   const ranges = [

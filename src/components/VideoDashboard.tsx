@@ -16,7 +16,7 @@ import {
 import Grid from "@mui/material/Grid2";
 import { Clear, Search } from "@mui/icons-material";
 import VideoCard from "@/components/VideoCard";
-import { testData } from "@/data/videos";
+// import { testData } from "@/data/videos";
 
 export type Video = {
   id: string;
@@ -170,10 +170,10 @@ export default function VideoDashboard({ videos }: { videos: Video[] }) {
       >
         {!filteredVideos.length && !searchQuery && (
           <Typography variant="body1" color="text.secondary">
-            You don't have any videos yet. Upload to get started!
+            {`You don't have any videos yet. Upload to get started!`}
           </Typography>
         )}
-        {filteredVideos.map((video: any) => (
+        {filteredVideos.map((video: Video) => (
           <Grid key={video.id} size={{ xs: 12, sm: 6, md: 4 }}>
             <VideoCard video={video} />
           </Grid>

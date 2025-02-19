@@ -122,7 +122,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLastName("");
       setUserId("");
       localStorage.removeItem("authData");
-      // revalidateHome();
 
       setNotification({
         message: "Logged out successfully.",

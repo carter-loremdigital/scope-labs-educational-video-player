@@ -16,7 +16,7 @@ const NotFound = () => {
         <Typography variant="h3" component="h1">
           Whoops!
         </Typography>
-        <Typography>The page you're looking for doesn't exist...</Typography>
+        <Typography>{`The page you're looking for doesn't exist...`}</Typography>
         <Button href="/">Back to Home</Button>
       </Stack>
     </Container>

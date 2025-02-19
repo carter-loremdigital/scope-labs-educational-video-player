@@ -113,7 +113,7 @@ const VideoDetails = ({
       // "Refresh" video data without window refresh
       router.replace(pathname);
       // Revalidate home page to avoid showing stale data
-      revalidateHome();
+      await revalidateHome();
     } catch (error) {
       // Log error & display notification
       console.error("Error saving edits:", error);
